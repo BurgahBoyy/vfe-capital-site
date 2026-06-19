@@ -241,6 +241,19 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
   *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
   .spa .reveal{opacity:1; transform:none;}
 }
+
+/* --- exchange ticker (About hero motion) --- */
+.nav-links{gap:24px;}
+.ticker{margin-top:6px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(13,16,22,0.55); overflow:hidden; padding:13px 0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+.ticker-track{display:inline-flex; white-space:nowrap; will-change:transform;}
+.js .ticker-track{animation:tickerscroll 40s linear infinite;}
+.ticker:hover .ticker-track{animation-play-state:paused;}
+@keyframes tickerscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ticker .item{font-family:var(--font-mono); font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--muted-2); padding:0 24px; display:inline-flex; align-items:center; gap:9px; border-right:1px solid var(--border);}
+.ticker .item b{color:var(--text); font-weight:500;}
+.ticker .item .ar{color:var(--gold);}
+.feature .cn-num{font-family:var(--font-mono); font-size:11px; color:var(--gold); letter-spacing:1px; margin-bottom:14px;}
+@media(prefers-reduced-motion:reduce){.js .ticker-track{animation:none;}}
 </style>
 </head>
 <body>
@@ -250,6 +263,7 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
     <a class="brand" href="#about" aria-label="VFE home"><span class="mark">VFE</span><span class="tag">the Glass Box</span></a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#about" data-nav>About</a>
+      <a href="#carriers" data-nav>For Carriers</a>
       <a href="#exchange" data-nav>The Exchange</a>
       <a href="#glass-box" data-nav>The Glass Box</a>
       <a href="#capital" data-nav>Capital Partners</a>
@@ -273,6 +287,24 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
       </div>
     </div>
   </section>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="item">Paper <span class="ar">&rarr;</span> <b>Proof</b></span>
+      <span class="item">Trust <span class="ar">&rarr;</span> <b>Verify</b></span>
+      <span class="item">Opaque <span class="ar">&rarr;</span> <b>Glass</b></span>
+      <span class="item">A report <span class="ar">&rarr;</span> <b>A live book</b></span>
+      <span class="item">Sampled <span class="ar">&rarr;</span> <b>Sourced</b></span>
+      <span class="item">Once a year <span class="ar">&rarr;</span> <b>Every load</b></span>
+      <span class="item">A phone call <span class="ar">&rarr;</span> <b>A system</b></span>
+      <span class="item">Paper <span class="ar">&rarr;</span> <b>Proof</b></span>
+      <span class="item">Trust <span class="ar">&rarr;</span> <b>Verify</b></span>
+      <span class="item">Opaque <span class="ar">&rarr;</span> <b>Glass</b></span>
+      <span class="item">A report <span class="ar">&rarr;</span> <b>A live book</b></span>
+      <span class="item">Sampled <span class="ar">&rarr;</span> <b>Sourced</b></span>
+      <span class="item">Once a year <span class="ar">&rarr;</span> <b>Every load</b></span>
+      <span class="item">A phone call <span class="ar">&rarr;</span> <b>A system</b></span>
+    </div>
+  </div>
   <div class="wrap"><div class="divider"></div></div>
   <section id="about-what">
     <div class="wrap">
@@ -319,6 +351,61 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
         <!-- TODO: set hello@example.com to your VFE-brand email before publishing -->
         <a class="btn btn-gold" href="mailto:hello@example.com">Email VFE <span class="arrow">&rarr;</span></a>
         <a class="btn btn-ghost" href="#capital">For capital partners</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ VIEW: FOR CARRIERS ============ -->
+<div class="view" id="carriers">
+  <section class="hero">
+    <div class="wrap hero-center">
+      <span class="kicker center" style="margin-bottom:24px;">For carriers and brokers</span>
+      <h1>Get paid for the work <span class="serif-accent">you've already done.</span></h1>
+      <p class="lead">Factoring turns your unpaid freight invoices into working capital, so a slow-paying customer never parks your cash flow. VFE does it in software, which means clearer terms, less paperwork, and none of the games.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#carriers-contact">Get early access <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#carriers-how">How it works</a>
+      </div>
+    </div>
+  </section>
+  <div class="wrap"><div class="divider"></div></div>
+  <section id="carriers-what">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="kicker">What you get</span><h2>Factoring without the fine print.</h2></div>
+      <div class="trio reveal">
+        <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg><h3>Cash, not a waiting game</h3><p>An advance against invoices your customer has not paid yet, so you can cover fuel, payroll, and the next load instead of waiting on net-30.</p></div>
+        <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg><h3>Terms you can actually see</h3><p>What you are charged, and why, is clear every time. No mystery fees, no fine-print surprises, no rate that quietly creeps.</p></div>
+        <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5l8 4v6c0 4.5-3.2 7.4-8 9-4.8-1.6-8-4.5-8-9v-6z"/><path d="M8.5 12l2.4 2.4 4.6-5"/></svg><h3>Protection from the games</h3><p>Double-brokering and fake-load fraud hurt honest carriers most. Our network-level checks are built to catch them before they reach you.</p></div>
+        <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2.5h8l4 4v15H6z"/><path d="M14 2.5v4h4M9 13h6M9 17h6"/></svg><h3>Less paperwork</h3><p>Source-verification runs in software, so an approval means fewer faxes and fewer phone calls chasing a yes.</p></div>
+        <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4.5" y="11" width="15" height="9.5" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.7-1.5"/></svg><h3>Your data stays yours</h3><p>We do not sell your information, and we do not trap you in a contract you cannot leave. Transparency runs both ways.</p></div>
+        <div class="feature"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 16.5V8h11v8.5M14 11.5h4l3 3v2h-7"/><circle cx="6" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg><h3>Built for how freight works</h3><p>Designed around the realities of trucking, not bolted onto a generic lending product.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="carriers-how">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="kicker">How it works</span><h2>Three steps, then you are paid.</h2></div>
+      <div class="trio reveal">
+        <div class="feature"><div class="cn-num">01</div><h3>Deliver the load</h3><p>Haul it and get your proof of delivery, the way you already do.</p></div>
+        <div class="feature"><div class="cn-num">02</div><h3>Send us the invoice</h3><p>Submit it with the documents. Verification runs automatically, at the source.</p></div>
+        <div class="feature"><div class="cn-num">03</div><h3>Get funded</h3><p>You get your advance, and we handle collecting from your customer.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="carriers-open" style="padding-top:0;">
+    <div class="wrap">
+      <div class="note reveal"><span class="kicker">Honest about timing</span><p>VFE is pre-launch and will be onboarding its first carriers soon. We are not going to promise you a rate or a funding time we have not proven yet. What we will promise is that when we quote you, <strong>the number and the reasoning will be right there in the open.</strong> Want to be one of the first carriers we work with?</p></div>
+    </div>
+  </section>
+  <section id="carriers-contact" class="contact">
+    <div class="wrap inner">
+      <span class="kicker center">Get early access</span>
+      <h2>Be first in line.</h2>
+      <p>Tell us about your operation and we will reach out as we open up.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="mailto:hello@example.com?subject=VFE%20-%20carrier%20early%20access">Email VFE <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#about">Back to home</a>
       </div>
     </div>
   </section>
@@ -593,6 +680,7 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
       <div class="foot-meta">
         <div class="links">
           <a href="#about" data-nav>About</a>
+          <a href="#carriers" data-nav>For Carriers</a>
           <a href="#exchange" data-nav>The Exchange</a>
           <a href="#glass-box" data-nav>The Glass Box</a>
           <a href="#capital" data-nav>Capital Partners</a>
