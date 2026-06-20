@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>VFE - the Glass Box</title>
 <meta name="description" content="VFE is software-native freight factoring: automated, verified at the source, and clear all the way down. Factoring is having its exchange moment." />
-<meta name="theme-color" content="#0a0c10" />
+<meta name="theme-color" content="#faf8f3" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Cpath d='M16 5l9 5.2v10.4L16 27l-9-5.4V10.2z' fill='none' stroke='%23c9a96e' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M16 5v22M7 10.2l9 5.4 9-5.4' fill='none' stroke='%23c9a96e' stroke-width='1' opacity='0.6'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -254,6 +254,41 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
 .ticker .item .ar{color:var(--gold);}
 .feature .cn-num{font-family:var(--font-mono); font-size:11px; color:var(--gold); letter-spacing:1px; margin-bottom:14px;}
 @media(prefers-reduced-motion:reduce){.js .ticker-track{animation:none;}}
+
+/* ===================================================================
+   VFE LIGHT MODE — now the site default.
+   Palette + type pulled directly from the VFE "Glass Box" Design System,
+   "Print (light)" tokens (paper #ffffff / #faf8f3, ink #11141b,
+   hairline #d9d4c8, gold accent #c9a96e, deep gold #8a7548) — the same
+   scheme applied to the VFE PDF documents. Gold stays the accent + rule;
+   gold-deep carries gold *text* for contrast on paper.
+   To revert to dark, delete this block.
+   =================================================================== */
+:root{
+  --bg:#ffffff; --bg-1:#faf8f3; --bg-2:#f4f1ea; --bg-3:#efece3;
+  --surface:#f4f1ea; --border:#d9d4c8; --border-2:#cdc7b8;
+  --text:#11141b; --text-2:#494f5c; --text-3:#6a7180;
+  --muted:#8c93a0; --muted-2:#7c8390;
+  --green:#4a8a64;
+}
+body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transparent 1px), linear-gradient(90deg, rgba(17,20,27,0.020) 1px, transparent 1px); opacity:0.55; }
+.nav{ background:rgba(255,255,255,0.74); border-bottom:1px solid rgba(217,212,200,0.85); }
+.box-frame{ background:linear-gradient(160deg,#ffffff,#faf8f3); box-shadow:0 24px 60px -34px rgba(17,20,27,0.20), inset 0 1px 0 rgba(255,255,255,0.7); }
+.feature{ background:linear-gradient(165deg,#ffffff,#f6f3ec); }
+.band{ background:linear-gradient(150deg,#faf8f3,#f2efe6); }
+.chain-node{ background:linear-gradient(165deg,#ffffff,#f4f1ea); }
+.note{ background:#faf8f3; }
+.asym .card{ background:linear-gradient(165deg,#ffffff,#f6f3ec); }
+.ctrl{ background:linear-gradient(165deg,#ffffff,#f4f1ea); }
+.ctrl.kill{ background:linear-gradient(165deg,rgba(201,169,110,0.16),#faf8f3); }
+.ctrl.kill .cl{ color:var(--gold-deep); }
+.ticker{ background:#faf8f3; }
+.status-pill{ background:#faf8f3; }
+.kicker,.brand .mark,.foot-brand .mark,.pillar .n,.rung .rn,.tl-year,
+.cn-num,.feature .cn-num,.feature .ico,.chain-node .cn,.box-caption .val,
+.frame-label .live,.asym .card .gold-line,.serif-accent,.ticker .item .ar{ color:var(--gold-deep); }
+.nav-links a.here{ color:var(--gold-deep); }
+.btn-ghost:hover{ border-color:var(--gold); color:var(--gold-deep); }
 </style>
 </head>
 <body>
@@ -312,7 +347,7 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
       <div class="prose reveal">
         <p>VFE is a software-native freight-factoring company. We advance cash to trucking companies against their freight invoices, and we run the entire operation in software: underwriting, source-verification, collections, cash control, and covenant monitoring.</p>
         <p>Every interaction is verified at the source, and every advance is clear, auditable, and traceable. We can show who we funded, why we funded them, and the proof behind the why, down to the original source document. We begin in freight, but the platform is software-first rather than freight-specific, and the same machinery is built to extend to other receivables over time.</p>
-        <p><a href="#glass-box" style="color:var(--gold);">Go inside the glass box <span aria-hidden="true">&rarr;</span></a></p>
+        <p><a href="#glass-box" style="color:var(--gold-deep);">Go inside the glass box <span aria-hidden="true">&rarr;</span></a></p>
       </div>
     </div>
   </section>
