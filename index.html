@@ -310,6 +310,19 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
 .frame-label .live,.asym .card .gold-line,.serif-accent,.ticker .item .ar{ color:var(--gold-deep); }
 .nav-links a.here{ color:var(--gold-deep); }
 .btn-ghost:hover{ border-color:var(--gold); color:var(--gold-deep); }
+.lead{max-width:520px; margin:8px auto 0; text-align:left; position:relative;}
+.lead-row{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px;}
+.lead-row>*{flex:1 1 200px; min-width:0;}
+.lead input,.lead select,.lead textarea{width:100%; font-family:inherit; font-size:15px; padding:12px 14px; border:1px solid var(--border); border-radius:10px; background:var(--bg); color:var(--text); box-sizing:border-box;}
+.lead textarea{margin-bottom:14px; resize:vertical; min-height:52px;}
+.lead input::placeholder,.lead textarea::placeholder{color:var(--muted);}
+.lead select{color:var(--text-2); cursor:pointer;}
+.lead input:focus,.lead select:focus,.lead textarea:focus{outline:none; border-color:var(--gold);}
+.lead .lead-btn{width:100%; justify-content:center; border:0; cursor:pointer;}
+.lead-honey{position:absolute !important; left:-9999px !important; width:1px; height:1px; opacity:0;}
+.lead-msg{margin-top:13px; font-size:14px; text-align:center;}
+.lead-msg.ok{color:var(--green);}
+.lead-msg.err{color:#b0573c;}
 /* --- mobile navigation (hamburger) --- */
 .nav-burger{display:none; flex-direction:column; justify-content:center; gap:5px; width:44px; height:40px; padding:10px 9px; margin-left:6px; background:transparent; border:1px solid var(--border); border-radius:10px; cursor:pointer; -webkit-tap-highlight-color:transparent;}
 .nav-burger span{display:block; width:100%; height:2px; background:var(--text); border-radius:2px; transition:transform .22s ease, opacity .18s ease;}
@@ -328,6 +341,7 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
   .nav-links .m-only{display:block; color:var(--gold-deep); font-weight:500;}
 }
 </style>
+<script>(function(){var ID="G-XXXXXXXXXX";if(ID.indexOf("XXXX")>-1)return;var x=document.createElement("script");x.async=1;x.src="https://www.googletagmanager.com/gtag/js?id="+ID;document.head.appendChild(x);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag("js",new Date());gtag("config",ID);})();</script>
 </head>
 <body>
 
@@ -340,9 +354,9 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
       <a href="#exchange" data-nav>History</a>
       <a href="#capital" data-nav>Capital Partners</a>
       <a href="#carriers" data-nav>For Carriers</a>
-      <a class="m-only" href="mailto:hello@example.com">Get in touch</a>
+      <a class="m-only" href="#carriers-contact">Get in touch</a>
     </nav>
-    <div class="nav-cta"><a class="btn btn-gold" href="mailto:hello@example.com">Get in touch</a></div>
+    <div class="nav-cta"><a class="btn btn-gold" href="#carriers-contact">Get in touch</a></div>
     <button class="nav-burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -604,10 +618,23 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
       <span class="kicker center">Get early access</span>
       <h2>Be first in line.</h2>
       <p>Tell us about your operation and we will reach out as we open up.</p>
-      <div class="actions">
-        <a class="btn btn-gold" href="mailto:hello@example.com?subject=VFE%20-%20carrier%20early%20access">Email VFE <span class="arrow">&rarr;</span></a>
-        <a class="btn btn-ghost" href="#about">Back to home</a>
-      </div>
+      <form class="lead" data-aud="carrier" novalidate>
+        <input type="hidden" name="_subject" value="VFE - carrier early access" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" class="lead-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="lead-row">
+          <input type="text" name="name" placeholder="Name" autocomplete="name" />
+          <input type="email" name="email" placeholder="Email *" required autocomplete="email" />
+        </div>
+        <div class="lead-row">
+          <input type="text" name="company" placeholder="Company" autocomplete="organization" />
+          <select name="role" aria-label="I am a"><option value="Carrier / fleet" selected>I run a carrier / fleet</option><option value="Broker / 3PL">Broker / 3PL</option><option value="Capital partner">Capital partner</option><option value="Other">Other</option></select>
+        </div>
+        <textarea name="message" rows="2" placeholder="Tell us about your operation (optional)"></textarea>
+        <button type="submit" class="btn btn-gold lead-btn">Request early access <span class="arrow">&rarr;</span></button>
+        <div class="lead-msg" aria-live="polite"></div>
+      </form>
     </div>
   </section>
 </div>
@@ -986,11 +1013,23 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
       <span class="kicker center">Request access</span>
       <h2>See the book.</h2>
       <p>The full data room opens under a mutual NDA. The first step is a short conversation.</p>
-      <div class="actions">
-        <!-- TODO: set capital@example.com to your VFE-brand email before publishing -->
-        <a class="btn btn-gold" href="mailto:capital@example.com?subject=VFE%20Capital%20Partners%3A%20access%20request">Request access <span class="arrow">&rarr;</span></a>
-        <a class="btn btn-ghost" href="#about">Back to home</a>
-      </div>
+      <form class="lead" data-aud="capital" novalidate>
+        <input type="hidden" name="_subject" value="VFE Capital Partners - access request" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" class="lead-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="lead-row">
+          <input type="text" name="name" placeholder="Name" autocomplete="name" />
+          <input type="email" name="email" placeholder="Email *" required autocomplete="email" />
+        </div>
+        <div class="lead-row">
+          <input type="text" name="company" placeholder="Company" autocomplete="organization" />
+          <select name="role" aria-label="I am a"><option value="Capital partner" selected>Capital partner</option><option value="Asset-based lender">Asset-based lender</option><option value="Fund / family office">Fund / family office</option><option value="Other">Other</option></select>
+        </div>
+        <textarea name="message" rows="2" placeholder="Anything we should know (optional)"></textarea>
+        <button type="submit" class="btn btn-gold lead-btn">Request access <span class="arrow">&rarr;</span></button>
+        <div class="lead-msg" aria-live="polite"></div>
+      </form>
     </div>
   </section>
 </div>
@@ -1201,6 +1240,23 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
     veng.style.transform='translate('+(dx*9).toFixed(1)+'px,'+(dy*7).toFixed(1)+'px)';
   });
   hero.addEventListener('mouseleave',function(){veng.style.transform='translate(0,0)';});
+})();
+</script>
+<script>
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('form.lead'),function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var msg=f.querySelector('.lead-msg'),btn=f.querySelector('.lead-btn'),hp=f.querySelector('.lead-honey'),em=f.querySelector('[name="email"]');
+      if(hp&&hp.value)return;
+      if(!em.value||!/.+@.+\..+/.test(em.value)){msg.textContent='Please enter a valid email.';msg.className='lead-msg err';em.focus();return;}
+      var prev=btn.innerHTML;btn.disabled=true;btn.textContent='Sending...';
+      fetch('https://formsubmit.co/ajax/rob@vfe.capital',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(){f.reset();btn.style.display='none';msg.textContent='Thanks, we got it and will be in touch.';msg.className='lead-msg ok';if(window.gtag){try{gtag('event','generate_lead',{audience:f.getAttribute('data-aud')});}catch(e){}}})
+      .catch(function(){btn.disabled=false;btn.innerHTML=prev;msg.innerHTML='Something went wrong, email <a href="mailto:rob@vfe.capital">rob@vfe.capital</a>.';msg.className='lead-msg err';});
+    });
+  });
 })();
 </script>
 </body>
