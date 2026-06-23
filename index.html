@@ -229,7 +229,6 @@ footer{border-top:1px solid var(--border); padding:46px 0 54px; margin-top:30px;
   .chain-node + .chain-node::before{content:"\2193"; left:50%; top:-23px; transform:translateX(-50%);}
 }
 @media(max-width:640px){
-  .nav-links{display:none;}
   .cmp{grid-template-columns:1fr;}
   .pillars{grid-template-columns:1fr;}
   .rung{grid-template-columns:1fr; gap:6px;}
@@ -289,6 +288,23 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
 .frame-label .live,.asym .card .gold-line,.serif-accent,.ticker .item .ar{ color:var(--gold-deep); }
 .nav-links a.here{ color:var(--gold-deep); }
 .btn-ghost:hover{ border-color:var(--gold); color:var(--gold-deep); }
+/* --- mobile navigation (hamburger) --- */
+.nav-burger{display:none; flex-direction:column; justify-content:center; gap:5px; width:44px; height:40px; padding:10px 9px; margin-left:6px; background:transparent; border:1px solid var(--border); border-radius:10px; cursor:pointer; -webkit-tap-highlight-color:transparent;}
+.nav-burger span{display:block; width:100%; height:2px; background:var(--text); border-radius:2px; transition:transform .22s ease, opacity .18s ease;}
+.nav.menu-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav.menu-open .nav-burger span:nth-child(2){opacity:0;}
+.nav.menu-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-links .m-only{display:none;}
+@media(max-width:640px){
+  .nav-burger{display:inline-flex;}
+  .nav-cta{display:none;}
+  .nav-links{position:absolute; left:0; right:0; top:100%; flex-direction:column; align-items:stretch; gap:0; padding:6px 0; background:rgba(255,255,255,0.985); -webkit-backdrop-filter:blur(16px) saturate(140%); backdrop-filter:blur(16px) saturate(140%); border-bottom:1px solid var(--border); box-shadow:0 26px 50px -26px rgba(17,20,27,0.28); display:none;}
+  .nav.menu-open .nav-links{display:flex;}
+  .nav-links a{padding:15px 24px; font-size:16px; border-bottom:1px solid rgba(217,212,200,0.45);}
+  .nav-links a:last-child{border-bottom:0;}
+  .nav-links a::after{display:none;}
+  .nav-links .m-only{display:block; color:var(--gold-deep); font-weight:500;}
+}
 </style>
 </head>
 <body>
@@ -296,14 +312,16 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#about" aria-label="VFE home"><span class="mark">VFE</span><span class="tag">the Glass Box</span></a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="primaryNav" aria-label="Primary">
       <a href="#about" data-nav>About</a>
       <a href="#carriers" data-nav>For Carriers</a>
       <a href="#exchange" data-nav>History</a>
       <a href="#glass-box" data-nav>The Glass Box</a>
       <a href="#capital" data-nav>Capital Partners</a>
+      <a class="m-only" href="mailto:hello@example.com">Get in touch</a>
     </nav>
     <div class="nav-cta"><a class="btn btn-gold" href="mailto:hello@example.com">Get in touch</a></div>
+    <button class="nav-burger" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -1006,6 +1024,20 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
   });
   window.addEventListener('popstate', function(){ route(location.hash); });
   route(location.hash);
+})();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.nav');
+  var btn=document.getElementById('navToggle');
+  var links=document.getElementById('primaryNav');
+  if(!nav||!btn||!links) return;
+  function close(){ nav.classList.remove('menu-open'); btn.setAttribute('aria-expanded','false'); }
+  function toggle(){ var open=nav.classList.toggle('menu-open'); btn.setAttribute('aria-expanded', open?'true':'false'); }
+  btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); toggle(); });
+  links.addEventListener('click', function(e){ if(e.target.closest('a')) close(); });
+  document.addEventListener('click', function(e){ if(nav.classList.contains('menu-open') && !e.target.closest('.nav')) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
 <script>
