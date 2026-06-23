@@ -38,8 +38,8 @@ section[id]{scroll-margin-top:88px;}
 
 /* view switching (SPA when .spa is set; else everything stacks = long-scroll fallback) */
 .spa .view{display:none;}
-.spa .view.active{display:block; animation:fadeview .4s ease;}
-@keyframes fadeview{from{opacity:0;}to{opacity:1;}}
+.spa .view.active{display:block; animation:fadeview .45s cubic-bezier(.22,.61,.36,1);}
+@keyframes fadeview{from{opacity:0; transform:translateY(9px);}to{opacity:1; transform:none;}}
 
 .kicker{font-family:var(--font-mono); font-weight:500; font-size:11px; letter-spacing:2.2px; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:9px;}
 .kicker::before{content:""; width:18px; height:1px; background:var(--gold); opacity:0.7;}
@@ -660,7 +660,7 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
   </section>
   <section id="exchange-resolution" style="padding-top:clamp(46px,6vw,84px);">
     <div class="wrap">
-      <div class="band center reveal"><span class="kicker center">The resolution</span><h2>VFE brings all three forces to factoring at once.</h2><p>The same three things that turned equities into a real market are what VFE runs on: <strong>disclosure</strong>, the whole book live; a <strong>single source of truth</strong>, every claim traced to an unfakeable document; and <strong>enforcement in code</strong>, checked on every transaction. That is the glass box.</p><div style="margin-top:30px;"><a class="btn btn-gold" href="#glass-box">See the glass box <span class="arrow">&rarr;</span></a><a class="btn btn-ghost" href="floor.html">Step onto the floor <span class="arrow">&rarr;</span></a></div></div>
+      <div class="band center reveal"><span class="kicker center">The resolution</span><h2>What the exchange did for stocks,<br><span class="serif-accent">VFE does for factoring.</span></h2><p>The same three things that turned equities into a real market are what VFE runs on: <strong>disclosure</strong>, the whole book live; a <strong>single source of truth</strong>, every claim traced to an unfakeable document; and <strong>enforcement in code</strong>, checked on every transaction. That is the glass box.</p><div style="margin-top:30px;"><a class="btn btn-gold" href="#glass-box">See the glass box <span class="arrow">&rarr;</span></a><a class="btn btn-ghost" href="floor.html">Step onto the floor <span class="arrow">&rarr;</span></a></div></div>
     </div>
   </section>
 </div>
