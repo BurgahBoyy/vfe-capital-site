@@ -591,56 +591,63 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
 <!-- ============ VIEW: THE EXCHANGE ============ -->
 <div class="view" id="exchange">
   <style>
-  .vtl{max-width:1040px; margin:0 auto;}
+  .vtl{max-width:760px; margin:0 auto;}
   #exchange-parallel .section-head{max-width:940px;}
   #exchange-parallel .section-head h2{font-size:clamp(40px,6.6vw,74px); line-height:1.02; letter-spacing:-0.8px; text-wrap:balance;}
   #exchange-parallel .section-head .lead{max-width:52ch; margin-left:auto; margin-right:auto;}
-  .vtl-head{display:grid; grid-template-columns:0.82fr 90px 1.5fr; margin-bottom:4px;}
-  .vtl-head .hs{grid-column:1; text-align:right; padding-right:28px; font-family:var(--font-mono); font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--text-3);}
-  .vtl-head .hv{grid-column:3; padding-left:30px; font-family:var(--font-mono); font-size:11px; letter-spacing:1.8px; text-transform:uppercase; color:var(--gold-deep);}
-  .vtl-row{display:grid; grid-template-columns:0.82fr 90px 1.5fr;}
-  .vtl-spine{grid-column:2; position:relative; display:flex; justify-content:center;}
-  .vtl-spine::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:1px; background:var(--gold-deep); opacity:0.35; transform:translateX(-0.5px);}
-  .vtl-yr{position:relative; z-index:2; margin-top:24px; width:64px; height:64px; border-radius:50%; background:var(--bg); border:1px solid var(--gold-deep); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:12px; color:var(--gold-deep);}
-  .vtl-vfe{grid-column:3; padding:22px 28px; margin:10px 0; border-left:2px solid var(--gold); background:linear-gradient(165deg, rgba(201,169,110,0.10), rgba(201,169,110,0.015)); border-radius:0 12px 12px 0;}
-  .vtl-vfe .lab{font-family:var(--font-mono); font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--gold-deep); margin-bottom:9px;}
-  .vtl-vfe h3{font-family:var(--font-display); font-weight:600; font-size:25px; color:var(--text); margin:0 0 9px; letter-spacing:-0.4px;}
-  .vtl-vfe p{font-size:15.5px; line-height:1.6; color:var(--text-2); margin:0;}
-  .vtl-stocks{grid-column:1; text-align:right; padding:26px 28px 10px;}
-  .vtl-stocks .lab{font-family:var(--font-mono); font-size:9.5px; letter-spacing:1.6px; text-transform:uppercase; color:var(--text-3); margin-bottom:8px;}
-  .vtl-stocks h4{font-family:var(--font-display); font-weight:500; font-size:16px; color:var(--text-2); margin:0 0 7px;}
-  .vtl-stocks p{font-size:13.5px; line-height:1.5; color:var(--text-3); margin:0;}
-  @media(max-width:680px){ .vtl-head{display:none;} .vtl-row{display:block; margin-bottom:10px;} .vtl-spine{justify-content:flex-start;} .vtl-spine::before{display:none;} .vtl-yr{margin-top:0; width:48px; height:48px; font-size:10px;} .vtl-vfe{margin:8px 0;} .vtl-stocks{text-align:left; padding:0 0 6px;} }
+  .vtl-row{display:grid; grid-template-columns:78px 1fr;}
+  .vtl-spine{position:relative; display:flex; justify-content:center;}
+  .vtl-spine::before{content:""; position:absolute; top:8px; bottom:-20px; left:50%; width:1px; background:var(--gold-deep); opacity:0.30; transform:translateX(-0.5px);}
+  .vtl-row:last-child .vtl-spine::before{bottom:auto; height:50px;}
+  .vtl-yr{position:relative; z-index:2; margin-top:4px; min-width:58px; height:58px; padding:0 8px; border-radius:50%; background:var(--bg); border:1px solid var(--gold-deep); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:12px; color:var(--gold-deep); white-space:nowrap;}
+  .vtl-content{padding:2px 0 34px 26px;}
+  .vtl-mkt .lab{font-family:var(--font-mono); font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:9px;}
+  .vtl-mkt h3{font-family:var(--font-display); font-weight:600; font-size:clamp(22px,2.5vw,29px); line-height:1.1; color:var(--text); margin:0 0 9px; letter-spacing:-0.4px;}
+  .vtl-mkt p{font-size:15.5px; line-height:1.6; color:var(--text-2); margin:0; max-width:54ch;}
+  .vtl-vfe{margin-top:18px; padding:15px 22px; border-left:2px solid var(--gold); background:linear-gradient(165deg, rgba(201,169,110,0.12), rgba(201,169,110,0.02)); border-radius:0 12px 12px 0;}
+  .vtl-vfe .lab{font-family:var(--font-mono); font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--gold-deep); margin-bottom:7px;}
+  .vtl-vfe h4{font-family:var(--font-display); font-weight:600; font-size:19px; line-height:1.15; color:var(--text); margin:0 0 7px; letter-spacing:-0.3px;}
+  .vtl-vfe p{font-size:14.5px; line-height:1.58; color:var(--text-2); margin:0; max-width:54ch;}
+  @media(max-width:680px){ .vtl-row{grid-template-columns:50px 1fr;} .vtl-yr{min-width:44px; height:44px; font-size:10px; padding:0 4px;} .vtl-content{padding-left:16px;} .vtl-spine::before{bottom:-16px;} }
   </style>
   <section id="exchange-parallel">
     <div class="wrap">
-      <div class="section-head center reveal"><span class="kicker center">History</span><h2>Stocks took two centuries<br>to become <span class="serif-accent">investable</span>.</h2><p class="lead">They got there by trading paper and trust for proof and disclosure. VFE brings every one of those advances to freight factoring at once.</p></div>
+      <div class="section-head center reveal"><span class="kicker center">History</span><h2>Stocks took two centuries<br>to become <span class="serif-accent">investable.</span></h2><p class="lead">They got there by trading paper and trust for proof and disclosure. VFE brings every one of those advances to freight factoring at once.</p></div>
       <div class="vtl reveal">
-        <div class="vtl-head"><div class="hs">The markets</div><div class="hv">VFE</div></div>
         <div class="vtl-row">
           <div class="vtl-spine"><div class="vtl-yr">1792</div></div>
-          <div class="vtl-vfe"><div class="lab">VFE</div><h3>Fully digital</h3><p>The whole operation runs in software, end to end. No paper, no fax, no filing cabinet, no back office to scale.</p></div>
-          <div class="vtl-stocks"><div class="lab">The markets</div><h4>Paper and trust</h4><p>Ownership on certificates, settled by hand, the market run on reputation.</p></div>
+          <div class="vtl-content">
+            <div class="vtl-mkt"><div class="lab">The markets</div><h3>Paper and trust</h3><p>Ownership on certificates, settled by hand, the market run on reputation.</p></div>
+            <div class="vtl-vfe"><div class="lab">VFE today</div><h4>Fully digital</h4><p>The whole operation runs in software, end to end. No paper, no fax, no filing cabinet, no back office to scale.</p></div>
+          </div>
         </div>
         <div class="vtl-row">
           <div class="vtl-spine"><div class="vtl-yr">1900s</div></div>
-          <div class="vtl-vfe"><div class="lab">VFE</div><h3>Fraud has nowhere to hide</h3><p>Every claim is verified against the original document and cross-checked across the network, before a dollar moves.</p></div>
-          <div class="vtl-stocks"><div class="lab">The markets</div><h4>Opacity bred fraud</h4><p>Bucket shops let people bet on prices they never owned. Fraud hid in the gaps.</p></div>
+          <div class="vtl-content">
+            <div class="vtl-mkt"><div class="lab">The markets</div><h3>Opacity bred fraud</h3><p>Bucket shops let people bet on prices they never owned. Fraud hid in the gaps.</p></div>
+            <div class="vtl-vfe"><div class="lab">VFE today</div><h4>Fraud has nowhere to hide</h4><p>Every claim is verified against the original document and cross-checked across the network, before a dollar moves.</p></div>
+          </div>
         </div>
         <div class="vtl-row">
           <div class="vtl-spine"><div class="vtl-yr">1934</div></div>
-          <div class="vtl-vfe"><div class="lab">VFE</div><h3>An open book</h3><p>Funders see the whole portfolio live, down to the individual invoice and the reason it was funded.</p></div>
-          <div class="vtl-stocks"><div class="lab">The markets</div><h4>Disclosure becomes law</h4><p>The SEC made disclosure mandatory. Markets ran on verifiable information, not reputation.</p></div>
+          <div class="vtl-content">
+            <div class="vtl-mkt"><div class="lab">The markets</div><h3>Disclosure becomes law</h3><p>The SEC made disclosure mandatory. Markets ran on verifiable information, not reputation.</p></div>
+            <div class="vtl-vfe"><div class="lab">VFE today</div><h4>An open book</h4><p>Funders see the whole portfolio live, down to the individual invoice and the reason it was funded.</p></div>
+          </div>
         </div>
         <div class="vtl-row">
           <div class="vtl-spine"><div class="vtl-yr">1971</div></div>
-          <div class="vtl-vfe"><div class="lab">VFE</div><h3>One live ledger</h3><p>A single, auditable record of every dollar funded, checkable in real time by anyone with access.</p></div>
-          <div class="vtl-stocks"><div class="lab">The markets</div><h4>One source of truth</h4><p>Screens and a central depository replaced the paper with one verified record.</p></div>
+          <div class="vtl-content">
+            <div class="vtl-mkt"><div class="lab">The markets</div><h3>One source of truth</h3><p>Screens and a central depository replaced the paper with one verified record.</p></div>
+            <div class="vtl-vfe"><div class="lab">VFE today</div><h4>One live ledger</h4><p>A single, auditable record of every dollar funded, checkable in real time by anyone with access.</p></div>
+          </div>
         </div>
         <div class="vtl-row">
           <div class="vtl-spine"><div class="vtl-yr">Today</div></div>
-          <div class="vtl-vfe"><div class="lab">VFE</div><h3>An investable asset class</h3><p>Standardized, transparent, and enforced in code. Freight factoring you can underwrite the way you underwrite a security.</p></div>
-          <div class="vtl-stocks"><div class="lab">The markets</div><h4>A cleared, investable market</h4><p>Transparent, centrally cleared, checked in real time, an asset class anyone can underwrite.</p></div>
+          <div class="vtl-content">
+            <div class="vtl-mkt"><div class="lab">The markets</div><h3>A cleared, investable market</h3><p>Transparent, centrally cleared, checked in real time, an asset class anyone can underwrite.</p></div>
+            <div class="vtl-vfe"><div class="lab">VFE today</div><h4>An investable asset class</h4><p>Standardized, transparent, and enforced in code. Freight factoring you can underwrite the way you underwrite a security.</p></div>
+          </div>
         </div>
       </div>
     </div>
