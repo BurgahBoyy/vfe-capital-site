@@ -665,16 +665,21 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
 <!-- ============ VIEW: THE EXCHANGE ============ -->
 <div class="view" id="exchange">
   <style>
-  .vtl{max-width:760px; margin:0 auto;}
+  .vtl{max-width:760px; margin:0 auto; position:relative;}
   #exchange-parallel .section-head{max-width:940px;}
   #exchange-parallel .section-head h2{font-size:clamp(40px,6.6vw,74px); line-height:1.02; letter-spacing:-0.8px; text-wrap:balance;}
   #exchange-parallel .section-head .lead{max-width:52ch; margin-left:auto; margin-right:auto;}
   .vtl-row{display:grid; grid-template-columns:78px 1fr;}
   .vtl-spine{position:relative; display:flex; justify-content:center;}
-  .vtl-spine::before{content:""; position:absolute; top:8px; bottom:-20px; left:50%; width:1px; background:var(--gold-deep); opacity:0.30; transform:translateX(-0.5px);}
+  .vtl-spine::before{display:none;}
   .vtl-row:last-child .vtl-spine::before{bottom:auto; height:50px;}
-  .vtl-yr{position:relative; z-index:2; margin-top:4px; min-width:58px; height:58px; padding:0 8px; border-radius:50%; background:var(--bg); border:1px solid var(--gold-deep); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:12px; color:var(--gold-deep); white-space:nowrap;}
-  .vtl-content{padding:2px 0 34px 26px;}
+  .vtl-yr{position:relative; z-index:2; margin-top:4px; min-width:58px; height:58px; padding:0 8px; border-radius:50%; background:var(--bg); border:1px solid var(--gold-deep); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:12px; color:var(--gold-deep); white-space:nowrap; transition:background .45s ease,color .45s ease,border-color .45s ease,box-shadow .45s ease;}
+  .vtl-content{padding:2px 0 34px 26px; opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .vtl-rail{position:absolute; width:2px; background:var(--gold-deep); opacity:0.20; border-radius:2px; z-index:0;}
+  .vtl-rail-fill{position:absolute; width:2px; height:0; background:var(--gold); border-radius:2px; z-index:1; box-shadow:0 0 9px rgba(201,169,110,0.55);}
+  .vtl-yr.lit{background:var(--gold); border-color:var(--gold); color:#2b2410; box-shadow:0 0 0 5px rgba(201,169,110,0.14);}
+  .vtl-row.seen .vtl-content{opacity:1; transform:none;}
+  @media(prefers-reduced-motion:reduce){ .vtl-content{opacity:1; transform:none;} .vtl-rail-fill{display:none;} }
   .vtl-mkt .lab{font-family:var(--font-mono); font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:9px;}
   .vtl-mkt h3{font-family:var(--font-display); font-weight:600; font-size:clamp(22px,2.5vw,29px); line-height:1.1; color:var(--text); margin:0 0 9px; letter-spacing:-0.4px;}
   .vtl-mkt p{font-size:15.5px; line-height:1.6; color:var(--text-2); margin:0; max-width:54ch;}
@@ -687,7 +692,8 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
   <section id="exchange-parallel">
     <div class="wrap">
       <div class="section-head center reveal"><span class="kicker center">History</span><h2>Stocks took two centuries<br>to become <span class="serif-accent">investable.</span></h2><p class="lead">They got there by trading paper and trust for proof and disclosure. VFE brings every one of those advances to freight factoring at once.</p></div>
-      <div class="vtl reveal">
+      <div class="vtl">
+        <div class="vtl-rail" id="vtlRail" aria-hidden="true"></div><div class="vtl-rail-fill" id="vtlFill" aria-hidden="true"></div>
         <div class="vtl-row">
           <div class="vtl-spine"><div class="vtl-yr">1792</div></div>
           <div class="vtl-content">
@@ -1280,6 +1286,26 @@ body::after{ background-image:linear-gradient(rgba(17,20,27,0.020) 1px, transpar
       .catch(function(){btn.disabled=false;btn.innerHTML=prev;msg.innerHTML='Something went wrong, email <a href="mailto:rob@vfe.capital">rob@vfe.capital</a>.';msg.className='lead-msg err';});
     });
   });
+})();
+</script>
+<script>
+(function(){
+ var vtl=document.querySelector('.vtl'); if(!vtl)return;
+ var rail=document.getElementById('vtlRail'),fill=document.getElementById('vtlFill');
+ var nodes=[].slice.call(vtl.querySelectorAll('.vtl-yr')),rows=[].slice.call(vtl.querySelectorAll('.vtl-row'));
+ if(!rail||!nodes.length)return;
+ var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function M(){var v=vtl.getBoundingClientRect(),a=nodes[0].getBoundingClientRect(),b=nodes[nodes.length-1].getBoundingClientRect();return{topY:a.top+a.height/2,railTop:(a.top+a.height/2)-v.top,railH:(b.top+b.height/2)-(a.top+a.height/2),railLeft:(a.left+a.width/2)-v.left};}
+ function upd(m){if(!vtl.offsetParent)return;m=m||M();var trig=window.innerHeight*0.52;fill.style.height=Math.max(0,Math.min(m.railH,trig-m.topY))+'px';nodes.forEach(function(n){var r=n.getBoundingClientRect();n.classList.toggle('lit',(r.top+r.height/2)<=trig+2);});}
+ function layout(){if(!vtl.offsetParent)return;var m=M();rail.style.left=fill.style.left=(m.railLeft-1)+'px';rail.style.top=fill.style.top=m.railTop+'px';rail.style.height=m.railH+'px';upd(m);}
+ if('IntersectionObserver' in window && !reduce){
+   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('seen');io.unobserve(e.target);}});},{rootMargin:'0px 0px -16% 0px'});
+   rows.forEach(function(r){io.observe(r);});
+   new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)layout();});}).observe(vtl);
+ } else { rows.forEach(function(r){r.classList.add('seen');}); }
+ if(reduce){nodes.forEach(function(n){n.classList.add('lit');});}
+ var t=false;window.addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false;});}},{passive:true});
+ window.addEventListener('resize',layout);layout();setTimeout(layout,400);
 })();
 </script>
 </body>
