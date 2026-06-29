@@ -384,15 +384,21 @@ form.lead{max-width:520px; margin:8px auto 0; text-align:left; position:relative
 <style>
 .machine-toggle{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--text-2);background:transparent;border:1px solid var(--border-2);border-radius:30px;padding:7px 12px;cursor:pointer;transition:color .2s,border-color .2s;flex:none;}
 .machine-toggle:hover{color:var(--gold);border-color:var(--gold);}
-#machine-view{position:fixed;inset:0;z-index:300;background:#0b0e13;color:#c9cdd5;overflow-y:auto;display:none;-webkit-overflow-scrolling:touch;}
+#machine-view{position:fixed;inset:0;z-index:40;background:#0b0e13;color:#c9cdd5;overflow-y:auto;display:none;-webkit-overflow-scrolling:touch;}
 body.machine-on{overflow:hidden;}
 body.machine-on #machine-view{display:block;}
-.mv-bar{position:sticky;top:0;display:flex;align-items:center;gap:16px;padding:15px 26px;background:rgba(11,14,19,.92);backdrop-filter:blur(10px);border-bottom:1px solid #1c2029;}
 .mv-brand{font-family:var(--font-mono);font-size:11.5px;letter-spacing:1.5px;color:#8b93a1;text-transform:uppercase;}
-.mv-actions{margin-left:auto;display:flex;gap:10px;}
+.mv-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
+body.machine-on .nav{background:rgba(11,14,19,.92)!important;border-bottom-color:#1c2029!important;}
+body.machine-on .nav-links a{color:#aeb4c0;}
+body.machine-on .nav-links a:hover,body.machine-on .nav-links a.here{color:var(--gold);}
+body.machine-on .brand .tag{color:#7f8794;}
+body.machine-on .machine-toggle{color:#dfe2e7;border-color:#2a3240;}
+body.machine-on .theme-toggle{color:#aeb4c0;border-color:#2a3240;}
+body.machine-on .nav-burger span{background:#aeb4c0;}
 .mv-btn{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid #2a3240;border-radius:8px;padding:8px 13px;color:#c9cdd5;cursor:pointer;}
 .mv-btn:hover{border-color:var(--gold);color:var(--gold);}
-.mv-wrap{max-width:820px;margin:0 auto;padding:34px 26px 90px;}
+.mv-wrap{max-width:820px;margin:0 auto;padding:calc(var(--navh,66px) + 30px) 26px 90px;}
 #mDoc{font-family:var(--font-mono);font-size:13.5px;line-height:1.75;color:#c9cdd5;}
 #mDoc h1{color:var(--gold);font-size:22px;margin:34px 0 14px;font-weight:500;letter-spacing:.2px;}
 #mDoc h2{color:var(--gold);font-size:16px;margin:28px 0 10px;font-weight:500;}
@@ -1125,8 +1131,7 @@ body.machine-on #machine-view{display:block;}
 
 </main>
 <section id="machine-view" aria-label="Machine-readable view of VFE">
-  <div class="mv-bar"><span class="mv-brand">VFE &middot; machine-readable</span><div class="mv-actions"><button class="mv-btn" id="mCopy" type="button">Copy markdown</button><button class="mv-btn" id="mHuman" type="button">&larr; Human view</button></div></div>
-  <div class="mv-wrap"><div id="mDoc"></div></div>
+  <div class="mv-wrap"><div class="mv-top"><span class="mv-brand">VFE &middot; machine-readable</span><button class="mv-btn" id="mCopy" type="button">Copy markdown</button></div><div id="mDoc"></div></div>
 </section>
 <script type="text/markdown" id="machineMd">
 # VFE - the Glass Box for freight factoring
@@ -1436,7 +1441,7 @@ This machine-readable view is also published at https://vfe.capital/llms.txt and
 <script>
 (function(){
  var mdEl=document.getElementById('machineMd'),doc=document.getElementById('mDoc');
- var openBtn=document.getElementById('machineToggle'),closeBtn=document.getElementById('mHuman'),copyBtn=document.getElementById('mCopy');
+ var openBtn=document.getElementById('machineToggle'),copyBtn=document.getElementById('mCopy');
  if(!mdEl||!doc) return;
  var MD=mdEl.textContent.trim();
  function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -1454,12 +1459,13 @@ This machine-readable view is also published at https://vfe.capital/llms.txt and
   cl();return out.join('');}
  doc.innerHTML=render(MD);
  var prevHash='#about';
- function openM(){if(document.body.classList.contains('machine-on'))return;if(location.hash!=='#machine')prevHash=location.hash||'#about';document.body.classList.add('machine-on');document.getElementById('machine-view').scrollTop=0;if(location.hash!=='#machine'){location.hash='#machine';}}
- function closeM(){document.body.classList.remove('machine-on');if(location.hash==='#machine'){history.replaceState(null,'',prevHash||'#about');}}
- openBtn&&openBtn.addEventListener('click',openM);
- closeBtn&&closeBtn.addEventListener('click',closeM);
- window.addEventListener('hashchange',function(){if(location.hash==='#machine'){openM();}else if(document.body.classList.contains('machine-on')){document.body.classList.remove('machine-on');}});
- if(location.hash==='#machine'){openM();}
+ function setLabel(){if(!openBtn)return;var on=document.body.classList.contains('machine-on');openBtn.innerHTML=on?'&larr; Human':'&lt;/&gt; Machine';openBtn.setAttribute('aria-label',on?'Switch back to the human view':'Switch to the machine-readable view of this page');}
+ function openM(){if(document.body.classList.contains('machine-on'))return;if(location.hash!=='#machine')prevHash=location.hash||'#about';document.body.classList.add('machine-on');var mv=document.getElementById('machine-view');if(mv)mv.scrollTop=0;if(location.hash!=='#machine'){location.hash='#machine';}setLabel();}
+ function closeM(){document.body.classList.remove('machine-on');if(location.hash==='#machine'){history.replaceState(null,'',prevHash||'#about');}setLabel();}
+ openBtn&&openBtn.addEventListener('click',function(){if(document.body.classList.contains('machine-on'))closeM();else openM();});
+ [].slice.call(document.querySelectorAll('[data-nav]')).forEach(function(a){a.addEventListener('click',function(){if(document.body.classList.contains('machine-on'))closeM();});});
+ window.addEventListener('hashchange',function(){if(location.hash==='#machine'){openM();}else if(document.body.classList.contains('machine-on')){closeM();}});
+ if(location.hash==='#machine'){openM();}else{setLabel();}
  copyBtn&&copyBtn.addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText(MD).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy markdown';},1500);});}catch(e){}});
 })();
 </script>
