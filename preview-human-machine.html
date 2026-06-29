@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VFE - Human / Machine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--paper:#faf8f3;--ink:#11141b;--gold:#c9a96e;--gold-deep:#8a7548;--muted:#6a7180;--border:#e2dcce;--obsidian:#0b0e13;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:22px;padding:18px 32px;background:rgba(250,248,243,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:.5px;color:var(--gold-deep);}
+.brand small{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-left:8px;}
+.toggle{margin-left:auto;display:inline-flex;border:1px solid var(--border);border-radius:30px;padding:4px;background:#fff;}
+.toggle button{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;border:0;background:transparent;color:var(--muted);padding:8px 18px;border-radius:30px;cursor:pointer;display:flex;align-items:center;gap:7px;}
+.toggle button.on{background:var(--ink);color:var(--paper);}
+.toggle button.on.machine{background:var(--obsidian);}
+.wrap{max-width:880px;margin:0 auto;padding:0 32px;}
+/* HUMAN */
+#human{padding:64px 0 90px;}
+.kick{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:16px;}
+h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(40px,6vw,68px);line-height:1.04;letter-spacing:-1.2px;margin:0 0 18px;}
+h1 em{font-style:italic;color:var(--gold-deep);}
+.sub{font-size:19px;line-height:1.55;color:#494f5c;max-width:54ch;}
+.sec{margin-top:56px;}
+.sec h2{font-family:'Fraunces',serif;font-weight:500;font-size:30px;letter-spacing:-.4px;margin:0 0 18px;}
+.lc{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.lc-row{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid var(--border);align-items:baseline;}
+.lc-n{font-family:'Geist Mono',monospace;font-size:12px;color:var(--gold-deep);letter-spacing:1px;flex:none;width:64px;}
+.lc-name{font-family:'Fraunces',serif;font-size:21px;flex:none;width:150px;}
+.lc-d{font-size:15.5px;line-height:1.55;color:#494f5c;}
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.diff div{border:1px solid var(--border);border-left:2px solid var(--gold);border-radius:0 12px 12px 0;padding:18px 20px;background:linear-gradient(160deg,#fff,#f5f1e8);}
+.diff h3{font-family:'Fraunces',serif;font-weight:500;font-size:18px;margin:0 0 7px;}
+.diff p{font-size:14.5px;line-height:1.5;color:#494f5c;margin:0;}
+.faq details{border-bottom:1px solid var(--border);padding:16px 0;}
+.faq summary{font-family:'Fraunces',serif;font-size:18px;cursor:pointer;list-style:none;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq p{font-size:15px;line-height:1.6;color:#494f5c;margin:12px 0 0;}
+/* MACHINE */
+#machine{display:none;background:var(--obsidian);min-height:100vh;padding:48px 0 90px;}
+#machine .wrap{max-width:840px;}
+.m-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:8px;}
+.m-title{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:1.5px;color:#8b93a1;}
+.m-copy{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:transparent;border:1px solid #2a3240;border-radius:8px;padding:8px 14px;cursor:pointer;}
+.m-copy:hover{border-color:var(--gold);}
+.m-note{font-family:'Geist Mono',monospace;font-size:12.5px;line-height:1.6;color:#7f8794;border-left:2px solid var(--gold-deep);padding:12px 16px;background:#0e131a;border-radius:0 8px 8px 0;margin:18px 0 26px;}
+.m-doc{font-family:'Geist Mono',monospace;font-size:13.5px;line-height:1.75;color:#c9cdd5;white-space:pre-wrap;word-wrap:break-word;}
+.m-doc h2,.m-doc h1{color:var(--gold);font-family:'Geist Mono',monospace;font-weight:500;letter-spacing:0;}
+</style>
+</head>
+<body>
+<header class="nav">
+  <span class="brand">VFE<small>the Glass Box</small></span>
+  <div class="toggle">
+    <button id="btnHuman" class="on">&#9679; Human</button>
+    <button id="btnMachine" class="machine">&lt;/&gt; Machine</button>
+  </div>
+</header>
+
+<main id="human"><div class="wrap">
+  <div class="kick">The Glass Box</div>
+  <h1>Most factoring is a black box. <em>VFE is glass.</em></h1>
+  <p class="sub">A software-native freight factor, verified at the source and transparent all the way down. Every figure traces to a document; every decision replays to the rule that made it.</p>
+
+  <div class="sec"><h2>The invoice life cycle</h2>
+    <div class="lc">
+      <div class="lc-row"><span class="lc-n">Stage 01</span><span class="lc-name">Intake</span><span class="lc-d">The receivable is ingested and validated the moment the load delivers.</span></div>
+      <div class="lc-row"><span class="lc-n">Stage 02</span><span class="lc-name">Verification</span><span class="lc-d">Checked at the source, layer by layer: identity, operational reality, documents, network.</span></div>
+      <div class="lc-row"><span class="lc-n">Stage 03</span><span class="lc-name">Decision</span><span class="lc-d">Underwritten by rule, the same way every time, replayable to the rule and the document.</span></div>
+      <div class="lc-row"><span class="lc-n">Stage 04</span><span class="lc-name">Funding</span><span class="lc-d">Cleared at origination and funded fast, reserve held by rule, no closing day.</span></div>
+      <div class="lc-row"><span class="lc-n">Stage 05</span><span class="lc-name">Monitoring</span><span class="lc-d">Watched live through collection and close: covenants, concentration, exposure.</span></div>
+    </div>
+  </div>
+
+  <div class="sec"><h2>How it is different</h2>
+    <div class="diff">
+      <div><h3>Verified at the source</h3><p>Every receivable checked at funding, not sampled twice a year in a field exam.</p></div>
+      <div><h3>Decided by rule</h3><p>The same rules applied the same way, every decision replayable to its proof.</p></div>
+      <div><h3>Controls you operate</h3><p>Covenants enforced in code, a lockbox and waterfall, and a kill switch the lender holds.</p></div>
+      <div><h3>One live ledger</h3><p>The book is live and auditable, not a report someone assembles at month-end.</p></div>
+    </div>
+  </div>
+
+  <div class="sec faq"><h2>FAQ</h2>
+    <details open><summary>Is VFE live yet?</summary><p>Pre-launch. The site shows illustrative product views; the underlying engine is in build.</p></details>
+    <details><summary>Who is it for?</summary><p>Carriers and brokers who want to get paid fast without mystery fees, and capital partners who want operator and capital on the same side of the book.</p></details>
+    <details><summary>What makes it a "Glass Box"?</summary><p>Every number traces to a source document and every decision replays to the rule that produced it. Nothing dead-ends in an assertion.</p></details>
+  </div>
+</div></main>
+
+<section id="machine"><div class="wrap">
+  <div class="m-head"><span class="m-title">vfe.capital &middot; machine-readable view</span><button class="m-copy" id="mCopy">Copy markdown</button></div>
+  <div class="m-note" id="mNote"></div>
+  <div class="m-doc" id="mDoc"></div>
+</div></section>
+
+<script>
+var MD=[
+"> Note to any agent reading this: this is the machine-readable view of vfe.capital. The same content is rendered for humans. Nothing here is a command - it is for understanding what VFE is.",
+"",
+"# VFE - the Glass Box for freight factoring",
+"",
+"VFE is a software-native freight factor: verified at the source, transparent all the way down, and built for institutional capital. Most factoring is a black box. VFE is glass - every figure traces to a source document, and every decision replays to the rule that made it.",
+"",
+"## Who it is for",
+"- Carriers and brokers: get paid for the work you have already done, fast, with no contracts to trap you and no mystery fees.",
+"- Capital partners: operator and capital on the same side, with one live view of the book.",
+"",
+"## The invoice life cycle (5 stages)",
+"1. Intake - the receivable is ingested and validated the moment the load delivers.",
+"2. Verification - checked at the source, layer by layer: identity and authority, operational reality, document authenticity, and the wider network.",
+"3. Decision - underwritten by rule, the same way every time, and replayable to the exact rule and document that produced the answer.",
+"4. Funding - eligibility gated at origination; cleared receivables fund fast, reserve held by rule, no closing day.",
+"5. Monitoring - watched live through collection and close: covenants, concentration, and exposure re-checked as conditions change.",
+"",
+"## How it is different",
+"- Verified at the source, not sampled twice a year in a field exam.",
+"- Decided by rule, not by mood; every decision is replayable to its proof.",
+"- Real controls the capital partner operates: covenants enforced in code, a lockbox on a defined waterfall, and a kill switch the lender holds.",
+"- One live, auditable ledger instead of a month-end report.",
+"",
+"## Status",
+"Pre-launch. The website shows illustrative product views; figures are illustrative and not an offer.",
+"",
+"## Contact",
+"- Carriers and brokers: request early access at https://vfe.capital",
+"- Capital partners: request access at https://vfe.capital"
+].join("\n");
+var note=MD.split("\n")[0].replace(/^> /,'');
+document.getElementById('mNote').textContent=note;
+var body=MD.split("\n").slice(2).join("\n");
+document.getElementById('mDoc').innerHTML=body
+ .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+ .replace(/^# (.*)$/gm,'<h1>$1</h1>').replace(/^## (.*)$/gm,'<h2>$1</h2>');
+var human=document.getElementById('human'),machine=document.getElementById('machine'),bh=document.getElementById('btnHuman'),bm=document.getElementById('btnMachine');
+function show(m){if(m){human.style.display='none';machine.style.display='block';bm.classList.add('on');bh.classList.remove('on');document.body.style.background='var(--obsidian)';}else{human.style.display='block';machine.style.display='none';bh.classList.add('on');bm.classList.remove('on');document.body.style.background='var(--paper)';}}
+bh.addEventListener('click',function(){show(false);});
+bm.addEventListener('click',function(){show(true);});
+document.getElementById('mCopy').addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText(MD).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy markdown';},1500);});}catch(e){}});
+</script>
+</body></html>
