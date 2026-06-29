@@ -30,7 +30,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,san
 .col-cap{margin-top:18px;text-align:center;font-size:16px;line-height:1.4;min-height:40px;transition:opacity .26s ease;}
 .col-old .col-cap{color:#6a7180;}.col-new .col-cap{color:#3a404c;font-weight:500;}
 /* old-way image */
-.old-card{flex:1;background:linear-gradient(160deg,#efece4,#e6e1d6);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:44px;position:relative;}
+.old-card{flex:1;background:linear-gradient(160deg,#efece4,#e6e1d6),repeating-linear-gradient(135deg,transparent 0 13px,rgba(120,110,90,.025) 13px 14px);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:44px;position:relative;}
 .old-ic{width:clamp(110px,11vw,170px);height:clamp(110px,11vw,170px);color:#a9a596;}.old-ic svg{width:100%;height:100%;}
 .old-redact{display:flex;flex-direction:column;gap:11px;width:58%;}
 .old-redact span{height:14px;border-radius:3px;background:#cfcabb;}
@@ -46,15 +46,19 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,san
 .ui-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:clamp(14px,2.2vh,26px) 0;border-bottom:1px solid #161b23;}
 .ui-row:last-child{border-bottom:0;}
 .rl{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,1.7vw,28px);color:#dfe2e7;}
-.rs{display:inline-flex;align-items:center;gap:8px;font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.5px;color:var(--gold);white-space:nowrap;}
+.rs{display:inline-flex;align-items:center;gap:7px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.4px;color:var(--gold);white-space:nowrap;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.22);border-radius:30px;padding:5px 12px;}
 .rs svg{width:16px;height:16px;}
 /* center */
 .center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;}
 .stage-num{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--muted);}
 .stage-name{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(52px,6.6vw,120px);line-height:.92;letter-spacing:-2px;color:var(--ink);transition:opacity .26s ease,transform .26s ease;}
-.stage-dots{display:flex;gap:9px;}
-.stage-dots i{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .3s,transform .3s;}
-.stage-dots i.on{background:var(--gold);transform:scale(1.3);}
+.track{position:relative;width:min(280px,82vw);height:12px;}
+.track-line{position:absolute;left:4px;right:4px;top:50%;height:2px;background:var(--border);transform:translateY(-50%);}
+.track-fill{position:absolute;left:4px;top:50%;height:2px;background:var(--gold);transform:translateY(-50%);width:0;transition:width .4s ease;}
+.track-dots{position:relative;display:flex;justify-content:space-between;align-items:center;height:100%;}
+.track-dots i{width:10px;height:10px;border-radius:50%;background:var(--border);transition:background .3s,transform .3s;z-index:1;box-shadow:0 0 0 3px var(--paper);}
+.track-dots i.done{background:var(--gold-deep);}
+.track-dots i.on{background:var(--gold);transform:scale(1.45);}
 .outro{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
 .outro h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(30px,4.4vw,54px);margin:0;letter-spacing:-.5px;}
 .outro h2 em{font-style:italic;color:var(--gold-deep);}
@@ -80,7 +84,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,san
     <div class="center">
       <div class="stage-num" id="stageNum">Stage 01</div>
       <div class="stage-name" id="stageName">Intake</div>
-      <div class="stage-dots" id="stageDots"></div>
+      <div class="track"><span class="track-line"></span><span class="track-fill" id="trackFill"></span><div class="track-dots" id="stageDots"></div></div>
     </div>
     <div class="col col-new">
       <div class="col-top"><span class="cdot"></span>The Glass Box</div>
@@ -113,6 +117,7 @@ var DATA=[
 ];
 var N=DATA.length,cur=-1;
 var oldImg=document.getElementById('oldImg'),newImg=document.getElementById('newImg'),oldCap=document.getElementById('oldCap'),newCap=document.getElementById('newCap'),stageNum=document.getElementById('stageNum'),stageName=document.getElementById('stageName'),dotsWrap=document.getElementById('stageDots'),sec=document.getElementById('gbxScroll');
+var trackFill=document.getElementById('trackFill');
 DATA.forEach(function(){var d=document.createElement('i');dotsWrap.appendChild(d);});
 var dots=[].slice.call(dotsWrap.children);
 function render(i){var d=DATA[i];
@@ -120,7 +125,7 @@ function render(i){var d=DATA[i];
  var rows=d.rows.map(function(r){return '<div class="ui-row"><span class="rl">'+r[0]+'</span><span class="rs">'+CK+r[1]+'</span></div>';}).join('');
  newImg.innerHTML='<div class="ui-card"><div class="ui-bar"><i></i><i></i><i></i><span class="ui-t">'+d.name+' · VFE</span><span class="ui-live"><b></b>LIVE</span></div><div class="ui-rows">'+rows+'</div></div>';
  oldCap.textContent=d.oldCap;newCap.textContent=d.newCap;stageNum.textContent=d.num;stageName.textContent=d.name;
- dots.forEach(function(el,j){el.classList.toggle('on',j===i);});}
+ dots.forEach(function(el,j){el.classList.toggle('on',j===i);el.classList.toggle('done',j<i);}); if(trackFill){trackFill.style.width='calc('+(N>1?(i/(N-1))*100:0)+'% - '+(N>1?(i/(N-1))*8:0)+'px)';}}
 function setActive(i){if(i===cur)return;var first=cur===-1;cur=i;
  if(first){render(i);return;}
  [oldImg,newImg,oldCap,newCap,stageName].forEach(function(b){b.style.opacity=0;});
