@@ -10,57 +10,55 @@
 :root{--paper:#faf8f3;--ink:#11141b;--gold:#c9a96e;--gold-deep:#8a7548;--muted:#6a7180;--border:#e2dcce;}
 *{box-sizing:border-box;}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
-.wrap{max-width:1060px;margin:0 auto;padding:0 32px;}
-.intro{min-height:66vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 32px;}
+.intro{min-height:64vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
 .kick{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:16px;}
-.intro h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(38px,5.4vw,64px);line-height:1.04;letter-spacing:-1px;margin:0;max-width:15ch;}
+.intro h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(38px,5.4vw,64px);line-height:1.04;letter-spacing:-1px;margin:0;max-width:14ch;}
 .intro h1 em{font-style:italic;color:var(--gold-deep);}
-.intro p{font-size:clamp(15px,1.6vw,18px);color:#494f5c;max-width:48ch;margin:18px auto 0;line-height:1.5;}
+.intro p{font-size:clamp(15px,1.6vw,18px);color:#494f5c;max-width:46ch;margin:18px auto 0;line-height:1.5;}
 .scrollcue{margin-top:30px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;animation:bob 2s ease-in-out infinite;}
 @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
-.gbx-scroll{position:relative;height:660vh;}
+.gbx-scroll{position:relative;height:560vh;}
 .gbx-pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
-.gbx-h{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:22px;text-align:center;}
-.gbx-stage{display:grid;grid-template-columns:1fr 186px 1fr;gap:24px;align-items:stretch;max-width:1040px;width:100%;padding:0 28px;}
-.gbx-panel{border-radius:16px;padding:26px 26px;min-height:286px;display:flex;flex-direction:column;}
+.gbx-h{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:26px;text-align:center;}
+.gbx-stage{display:grid;grid-template-columns:1fr 220px 1fr;gap:26px;align-items:center;max-width:1020px;width:100%;padding:0 28px;}
+.gbx-panel{border-radius:16px;padding:26px 26px;display:flex;flex-direction:column;}
 .gbx-black{background:#0b0e13;border:1px solid #1f242e;}
 .gbx-glass{background:linear-gradient(160deg,#ffffff,#f3efe6);border:1px solid var(--border);box-shadow:0 26px 60px -42px rgba(17,20,27,.28);}
-.gbx-tag{font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:15px;display:flex;align-items:center;gap:8px;}
+.gbx-tag{font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .gbx-black .gbx-tag{color:#5f6775;}.gbx-glass .gbx-tag{color:var(--gold-deep);}
 .gbx-dot{width:6px;height:6px;border-radius:50%;}
 .gbx-black .gbx-dot{background:#3a4150;}.gbx-glass .gbx-dot{background:var(--gold);box-shadow:0 0 7px rgba(201,169,110,.6);}
 .gbx-body{transition:opacity .24s ease, transform .24s ease;}
-.auto-tag{display:inline-flex;align-items:center;gap:6px;font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-deep);background:rgba(201,169,110,.13);border:1px solid rgba(201,169,110,.32);border-radius:30px;padding:4px 11px;margin-bottom:13px;}
+.auto-tag{display:inline-flex;align-items:center;gap:6px;font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-deep);background:rgba(201,169,110,.13);border:1px solid rgba(201,169,110,.32);border-radius:30px;padding:4px 11px;margin-bottom:13px;align-self:flex-start;}
 .auto-tag svg{width:11px;height:11px;}
-.gbx-body h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:23px;line-height:1.13;margin:0 0 11px;}
-.gbx-black .gbx-body h3{color:#c4c9d2;}.gbx-glass .gbx-body h3{color:var(--ink);}
-.gbx-body p{font-size:14.5px;line-height:1.56;margin:0;}
-.gbx-black .gbx-body p{color:#8b93a1;}.gbx-glass .gbx-body p{color:#494f5c;}
-.redact{display:flex;flex-direction:column;gap:8px;margin-top:18px;}
-.redact span{height:11px;border-radius:3px;background:#1b212c;}
-.verified{margin-top:18px;display:flex;flex-direction:column;gap:9px;}
-.verified div{display:flex;align-items:center;gap:9px;font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:.3px;color:var(--gold-deep);opacity:0;animation:vin .45s ease forwards;}
-.verified div:nth-child(1){animation-delay:.05s;}.verified div:nth-child(2){animation-delay:.13s;}.verified div:nth-child(3){animation-delay:.21s;}
-.verified svg{width:14px;height:14px;flex:none;}
+.line{font-size:17px;line-height:1.42;margin:0;}
+.gbx-black .line{color:#aab0bc;}.gbx-glass .line{color:var(--ink);font-weight:500;}
+.chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px;}
+.chips span{display:inline-flex;align-items:center;gap:6px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.3px;color:var(--gold-deep);border:1px solid rgba(201,169,110,.32);border-radius:30px;padding:4px 11px;opacity:0;animation:vin .45s ease forwards;}
+.chips span:nth-child(1){animation-delay:.05s;}.chips span:nth-child(2){animation-delay:.13s;}.chips span:nth-child(3){animation-delay:.21s;}
+.chips svg{width:12px;height:12px;}
 @keyframes vin{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-.gbx-list{display:flex;flex-direction:column;justify-content:center;gap:11px;text-align:center;}
-.gbx-item{font-family:'Fraunces',Georgia,serif;font-size:18px;color:#c4bca9;opacity:.45;transition:color .3s,opacity .3s,transform .3s;line-height:1.05;}
-.gbx-item.on{color:var(--ink);opacity:1;transform:scale(1.12);}
-.gbx-count{font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:1.4px;color:var(--muted);margin-top:11px;}
-.gbx-prog{height:2px;background:var(--border);border-radius:2px;margin:11px auto 0;width:140px;position:relative;overflow:hidden;}
-.gbx-prog i{position:absolute;left:0;top:0;bottom:0;background:var(--gold);width:0;transition:width .15s linear;}
-.outro{min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.gbx-list{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;}
+.stage-icon{width:62px;height:62px;color:var(--gold-deep);transition:opacity .24s ease,transform .24s ease;}
+.stage-icon svg{width:100%;height:100%;}
+.stage-name{font-family:'Fraunces',Georgia,serif;font-size:25px;color:var(--ink);transition:opacity .24s ease;line-height:1;}
+.stage-dots{display:flex;gap:8px;}
+.stage-dots i{width:7px;height:7px;border-radius:50%;background:var(--border);transition:background .3s,transform .3s;}
+.stage-dots i.on{background:var(--gold);transform:scale(1.25);}
+.gbx-count{font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:1.4px;color:var(--muted);}
+.outro{min-height:56vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
 .outro h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(30px,4.4vw,52px);margin:0;letter-spacing:-.5px;}
 .outro h2 em{font-style:italic;color:var(--gold-deep);}
 .outro p{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--muted);margin-top:14px;text-transform:uppercase;}
-@media(max-width:840px){.gbx-stage{grid-template-columns:1fr;gap:12px;}.gbx-list{order:-1;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:7px 14px;}.gbx-item{font-size:14px;}.gbx-panel{min-height:0;}}
+@media(max-width:840px){.gbx-stage{grid-template-columns:1fr;gap:14px;}.gbx-list{order:-1;}.stage-icon{width:48px;height:48px;}}
 </style>
 </head>
 <body>
 <section class="intro"><div class="wrap">
   <div class="kick">The Invoice Life Cycle</div>
-  <h1>One receivable, <em>six stages, in the open.</em></h1>
-  <p>Intake to closed. Everywhere else, each stage is manual and opaque. Scroll to see the old way and the Glass Box, side by side.</p>
+  <h1>One receivable, <em>five stages, in the open.</em></h1>
+  <p>Intake to monitored. Everywhere else, each stage is manual and opaque. Scroll: the old way, and the Glass Box.</p>
   <div class="scrollcue">Scroll &darr;</div>
 </div></section>
 <section class="gbx-scroll" id="gbxScroll"><div class="gbx-pin">
@@ -68,42 +66,50 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,san
   <div class="gbx-stage">
     <div class="gbx-panel gbx-black"><div class="gbx-tag"><span class="gbx-dot"></span>Black box</div><div class="gbx-body" id="blackBody"></div></div>
     <div class="gbx-list">
-      <div id="gbxList"><div class="gbx-item">Intake</div><div class="gbx-item">Verification</div><div class="gbx-item">Decision</div><div class="gbx-item">Funding</div><div class="gbx-item">Monitoring</div><div class="gbx-item">Closure</div></div>
-      <div class="gbx-count" id="gbxCount">01 / 06</div>
-      <div class="gbx-prog"><i id="gbxProg"></i></div>
+      <div class="stage-icon" id="stageIcon"></div>
+      <div class="stage-name" id="stageName">Intake</div>
+      <div class="stage-dots" id="stageDots"></div>
+      <div class="gbx-count" id="gbxCount">01 / 05</div>
     </div>
-    <div class="gbx-panel gbx-glass"><div class="gbx-tag"><span class="gbx-dot"></span>The Glass Box</div><div class="gbx-body" id="glassBody"></div></div>
+    <div class="gbx-panel gbx-glass"><div class="gbx-body" id="glassBody"></div></div>
   </div>
 </div></section>
-<section class="outro"><div class="wrap"><h2>Intake to closed. <em>Every stage, on the record.</em></h2><p>One receivable, one live chain</p></div></section>
+<section class="outro"><div class="wrap"><h2>Intake to monitored. <em>Every stage, on the record.</em></h2><p>One receivable, one live chain</p></div></section>
 <script>
 var CK='<svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="2"><path d="M5 12.5l4 4L19 7"/></svg>';
 var BOLT='<svg viewBox="0 0 24 24" fill="#8a7548"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg>';
+var IC={
+ intake:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l2-8h12l2 8"/><path d="M4 13v6h16v-6h-5l-1.4 2H10.4L9 13H4z"/><path d="M12 2.5v6"/><path d="M9.5 6L12 8.5 14.5 6"/></svg>',
+ verification:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 4v6c0 4.5-3.2 7.4-8 9-4.8-1.6-8-4.5-8-9v-6z"/><path d="M8.5 12l2.4 2.4 4.6-5"/></svg>',
+ decision:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 10-10 10L2 12z"/><path d="M8.4 12l2.4 2.4 4.8-5.2"/></svg>',
+ funding:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>',
+ monitoring:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2.5-6 4 13 2.5-7H22"/></svg>'
+};
 var DATA=[
- {bh:"Arrives in a dozen formats",bp:"Email, fax, a portal, a phone call. Someone keys the invoice and the load documents into a system, and errors enter right here.",auto:"Ingested and validated",gh:"Captured and structured at intake",gp:"Every receivable is ingested and validated the moment it arrives - invoice and load documents, structured and attached, ready to verify.",v:["Structured at intake","Documents attached","No re-keying"]},
- {bh:"A glance and a phone call",bp:"A clerk eyeballs the paperwork and dials a number or two. Fraud and double-brokering slip through the gaps.",auto:"Verified at the source",gh:"Checked at the source, layer by layer",gp:"Identity, the documents, the transaction, and the wider network - each confirmed against the original, automatically, every time.",v:["Identity & authority","Documents authentic","Network-screened"]},
- {bh:"‘Approved.’",bp:"The reasoning lives in someone’s head. Ask twice, and you may get two different answers.",auto:"Decided by rule",gh:"Underwritten by rule, not by mood",gp:"The same rules applied the same way every time, and replayable to the exact rule and document that produced the answer.",v:["Rule-based","Same every time","Replayable"]},
- {bh:"Waiting on a person",bp:"Approval sits in a queue. Funding takes a day, sometimes three, while the carrier waits on fuel and payroll.",auto:"Funded by rule",gh:"Cleared at origination, funded fast",gp:"Eligibility is gated at origination. The moment a receivable clears the checks it funds - no closing day, no queue.",v:["Gated at origination","No closing day","Fast to cash"]},
- {bh:"Goes quiet after funding",bp:"Once the money is out, the book sleeps. Problems surface at the next field exam, months later.",auto:"Watched continuously",gh:"Watched live, not twice a year",gp:"Covenants, concentration, and exposure are re-checked as conditions change - tightening before a breach, not after.",v:["Continuous re-check","Covenants live","Before a breach"]},
- {bh:"Reconciled by hand",bp:"Cash lands somewhere and is squared up later. The reserve releases when someone gets to it; the book is a month-end report.",auto:"Reserve released on the rule",gh:"Cash, reserve, and close on the rule",gp:"Payment flows through a lockbox on a defined waterfall, the reserve releases the moment collection clears, and the book stays live.",v:["Lockbox & waterfall","Auto-reconciled","Reserve auto-released"]}
+ {key:'intake',name:'Intake',bl:"Documents arrive in a dozen formats and get keyed in by hand.",auto:"Ingested at intake",gl:"Ingested and validated the moment the receivable arrives.",v:["Structured","Attached"]},
+ {key:'verification',name:'Verification',bl:"A glance and a phone call. Fraud slips through the gaps.",auto:"Verified at the source",gl:"Checked at the source, layer by layer - identity, documents, network.",v:["Authority","Authentic","Network"]},
+ {key:'decision',name:'Decision',bl:"‘Approved.’ The reasoning lives in someone’s head.",auto:"Decided by rule",gl:"Underwritten by rule, the same way every time, and replayable.",v:["Rule-based","Replayable"]},
+ {key:'funding',name:'Funding',bl:"Approval waits in a queue. Cash takes a day, or three.",auto:"Funded by rule",gl:"Cleared at origination and funded fast, reserve held by rule.",v:["No closing day","Fast to cash"]},
+ {key:'monitoring',name:'Monitoring',bl:"After funding the book sleeps until the next field exam.",auto:"Watched continuously",gl:"Watched live through collection and close - covenants, concentration, disputes.",v:["Covenants live","Through to close"]}
 ];
 var N=DATA.length,cur=-1;
-var items=[].slice.call(document.querySelectorAll('#gbxList .gbx-item'));
 var blackBody=document.getElementById('blackBody'),glassBody=document.getElementById('glassBody');
-var prog=document.getElementById('gbxProg'),count=document.getElementById('gbxCount'),sec=document.getElementById('gbxScroll');
+var stageIcon=document.getElementById('stageIcon'),stageName=document.getElementById('stageName'),count=document.getElementById('gbxCount'),sec=document.getElementById('gbxScroll'),dotsWrap=document.getElementById('stageDots');
+DATA.forEach(function(){var d=document.createElement('i');dotsWrap.appendChild(d);});
+var dots=[].slice.call(dotsWrap.children);
 function render(i){var d=DATA[i];
- blackBody.innerHTML='<h3>'+d.bh+'</h3><p>'+d.bp+'</p><div class="redact"><span style="width:86%"></span><span style="width:60%"></span><span style="width:72%"></span></div>';
- glassBody.innerHTML='<span class="auto-tag">'+BOLT+'Automated &middot; '+d.auto+'</span><h3>'+d.gh+'</h3><p>'+d.gp+'</p><div class="verified">'+d.v.map(function(x){return '<div>'+CK+x+'</div>';}).join('')+'</div>';
- count.textContent='0'+(i+1)+' / 0'+N;}
+ blackBody.innerHTML='<div class="gbx-tag"><span class="gbx-dot"></span>Black box</div><p class="line">'+d.bl+'</p>';
+ glassBody.innerHTML='<span class="auto-tag">'+BOLT+'Automated &middot; '+d.auto+'</span><p class="line">'+d.gl+'</p><div class="chips">'+d.v.map(function(x){return '<span>'+CK+x+'</span>';}).join('')+'</div>';
+ stageIcon.innerHTML=IC[d.key];stageName.textContent=d.name;count.textContent='0'+(i+1)+' / 0'+N;
+ dots.forEach(function(el,j){el.classList.toggle('on',j===i);});}
 function setActive(i){if(i===cur)return;var first=cur===-1;cur=i;
- items.forEach(function(el,j){el.classList.toggle('on',j===i);});
  if(first){render(i);return;}
- [blackBody,glassBody].forEach(function(b){b.style.opacity=0;b.style.transform='translateY(7px)';});
- setTimeout(function(){render(i);[blackBody,glassBody].forEach(function(b){b.style.opacity=1;b.style.transform='none';});},200);}
+ [blackBody,glassBody,stageIcon,stageName].forEach(function(b){b.style.opacity=0;});
+ setTimeout(function(){render(i);[blackBody,glassBody,stageIcon,stageName].forEach(function(b){b.style.opacity=1;});},190);}
 function onScroll(){var r=sec.getBoundingClientRect();var range=sec.offsetHeight-window.innerHeight;
- var p=range>0?Math.min(Math.max(-r.top,0),range)/range:0;prog.style.width=(p*100)+'%';
+ var p=range>0?Math.min(Math.max(-r.top,0),range)/range:0;
  setActive(Math.max(0,Math.min(N-1,Math.floor(p*N*0.999))));}
-render(0);items[0].classList.add('on');cur=0;
+render(0);cur=0;
 window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
 </script>
 </body></html>
